@@ -5,26 +5,37 @@
 
 from decimal import Decimal
 
-    ## Version 1 algorithm
+def summ (user_number):
+    if user_number < 0:
+        user_number *= -1
 
-def summ (number):
-    if number < 0:
-        number *= -1
-    n_fractional_part = number-int(number)
-    while n_fractional_part %10 !=0:
-        n_fractional_part *= 10
-    number = n_fractional_part + int(number)
-    sum = 0
-    while number != 0:
-        sum += number % 10
-        number //= 10
+    n1 = int(user_number)
+    n2 = Decimal(user_number-n1)
+  
+    sum1 = 0 ## отдельно считаем сумму цифр в целой части числа 
+    while n1 != 0:
+        sum1 = sum1 + n1 % 10
+        n1 //= 10
+    # print(f'Сумма цифр в первой части: {sum1}')
+
+    while n2 %10 !=0:
+        n2 *= 10
+    # print (f'Округлили дробную часть до целого числа {n2}')
+
+    sum2 = 0 ## отдельно считаем сумму цифр в дробной части числа 
+    while n2 != 0:
+        sum2 = sum2 + n2 % 10
+        n2 //= 10
+    # print(f'Сумма цифр в дробной части: {sum2}')
+
+    sum = sum1 + sum2
     return int(sum)
 
 try:
-    user_number = Decimal(input('Введите любое число: '))
-    print(f'Сумма цифр в вашел числе равна: {summ(user_number)}')
+    number = Decimal(input('Введите любое число: '))
+    print(f'Сумма цифр в вашем числе равна: {summ(number)}')
 except:
-    print('Вводите только цифры')
+    print('Вводите только числа')
 
 
     ## Version 2 string
